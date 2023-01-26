@@ -1,0 +1,224 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+    <head>
+        <meta charset="UTF-8">
+        <title>資料結構-堆疊與佇列(Stack &amp; Queue)(1/2) | Penguinの筆記</title>
+        <meta name="author" content="Penguin">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+        <link rel="icon" href="https://i.imgur.com/Plqu20b.png">
+        <script src="https://cdn.staticfile.org/vue/3.2.45/vue.global.prod.min.js"></script>
+        <script src="https://cdn.staticfile.org/highlight.js/11.7.0/highlight.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/11.7.0/styles/github.min.css">
+        <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.2.1/css/all.min.css">
+        
+        <script src="https://polyfill.io/v3/polyfill.min.js?features="></script>
+        
+        
+        <script src="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.js"></script>
+        <script src="https://cdn.staticfile.org/KaTeX/0.16.4/contrib/auto-render.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.css">
+        
+        
+        <link rel="stylesheet" href="/css/fonts.min.css">
+        <link rel="stylesheet" href="/css/particlex.css">
+    <meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div id="loading" style="height: 100vh; width: 100vw; position: fixed; display: flex; z-index: 2147483647; justify-content: space-between; background: #fff; transition: opacity 0.3s ease-out, visibility 0.3s; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none">
+    <div style="position: fixed; height: 100vh; width: 100vw; display: flex; justify-content: center; align-items: center">
+        <div id="loadcontent" style="width: 50vmin; height: 50vmin; padding: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; border: solid 10px #a3ddfb; text-align: center">
+            <div>
+                <h2>LOADING...</h2>
+                <p style="word-break: keep-all">加载过慢请开启缓存（浏览器默认开启）</p>
+                <div>
+                    <img alt="loading" src="/images/loading.gif" style="height: 50px">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <div id="layout">
+            <transition name="into">
+            <div v-show="showpage" style="display: -not-none">
+                <div id="menushow">
+                    <nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">Penguinの筆記</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;about</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;tags</span>
+        </a>
+        
+    </div>
+    <div :class="'phone-menu ' + menushow" id="phone-menu">
+        <div class="curtain" @click="menushow = !menushow" v-show="menushow"></div>
+        <div class="title" @click="menushow = !menushow">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;Penguinの筆記</span>
+        </div>
+        <transition name="slide">
+        <div class="items" v-show="menushow">
+            
+            <a href="/">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-house fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">home</div>
+                </div>
+            </a>
+            
+            <a href="/about">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-id-card fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">about</div>
+                </div>
+            </a>
+            
+            <a href="/archives">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-box-archive fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">archives</div>
+                </div>
+            </a>
+            
+            <a href="/categories">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-bookmark fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">categories</div>
+                </div>
+            </a>
+            
+            <a href="/tags">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">tags</div>
+                </div>
+            </a>
+            
+        </div>
+        </transition>
+    </div>
+</nav>
+
+                </div>
+                <div id="main">
+                    <div class="article">
+    <div>
+        <h1>資料結構-堆疊與佇列(Stack &amp; Queue)(1/2) </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/1/26
+        </span>
+        
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="資料結構-堆疊與佇列-Stack-amp-Queue-1-x2F-2"><a href="#資料結構-堆疊與佇列-Stack-amp-Queue-1-x2F-2" class="headerlink" title="資料結構-堆疊與佇列(Stack &amp; Queue)(1&#x2F;2)"></a>資料結構-堆疊與佇列(Stack &amp; Queue)(1&#x2F;2)</h1><p>當我們碰到大量資料的時候，通常都會用<font color=#0000FF>陣列</font>來處理，資料結構中處理陣列有兩種較常見的方式：堆疊(stack)與佇列(queue)。</p>
+<h2 id="什麼是堆疊"><a href="#什麼是堆疊" class="headerlink" title="什麼是堆疊?"></a>什麼是<font color=#008000>堆疊</font>?</h2><p>堆疊(Stack)是一種排列結構，不過是<font color=#0000FF>由下往上</font>堆放，任何動作都必須從最<font color=#0000FF>頂端(top)</font>進行，因此有<font color=#0000FF>「後進先出」(Last In First Out)</font>特性，縮寫為<font color=#0000FF>LIFO</font>。</p>
+<h3 id="在應用中"><a href="#在應用中" class="headerlink" title="在應用中:"></a>在應用中:</h3><ul>
+<li>回到上一頁: 最先瀏覽的頁面，會在點擊最後一次此按鈕時才出現。</li>
+<li>還原: 最先被記錄的動作，會在點擊最後一次此按鈕時才被還原。</li>
+</ul>
+<p><img src="https://i.imgur.com/bUyAFjL.jpg" alt="Push &amp; Pop" title="Push 和 Pop 示意圖"></p>
+<h2 id="基礎結構"><a href="#基礎結構" class="headerlink" title="基礎結構"></a>基礎結構</h2><blockquote>
+<p>C++</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Stack</span>&#123;</span><br><span class="line">  <span class="type">int</span> arr[MAXN], now;</span><br><span class="line">  <span class="built_in">Stack</span>() : <span class="built_in">now</span>(<span class="number">0</span>) &#123;&#125;</span><br><span class="line">  <span class="function"><span class="type">int</span> <span class="title">top</span><span class="params">()</span></span>&#123; <span class="comment">//回傳stack最頂端的元素</span></span><br><span class="line">    <span class="keyword">return</span> arr[now<span class="number">-1</span>];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">pop</span><span class="params">()</span></span>&#123; <span class="comment">//刪除stack最頂端的元素</span></span><br><span class="line">    now--;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">push</span><span class="params">(<span class="type">int</span> val)</span></span>&#123; <span class="comment">//加入一個元素在stack最頂端</span></span><br><span class="line">    arr[now++] = val;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">size</span><span class="params">()</span></span>&#123; <span class="comment">//回傳stack的大小</span></span><br><span class="line">  <span class="keyword">return</span> now;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Python(使用鏈結串列)</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">StackNode</span>():</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, data=<span class="literal">None</span>, <span class="built_in">next</span>=<span class="literal">None</span></span>):</span><br><span class="line">        self.data = data</span><br><span class="line">        self.<span class="built_in">next</span> = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">LinkedStack</span>():</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, top=<span class="literal">None</span></span>):</span><br><span class="line">        self.top = top</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">push</span>(<span class="params">self, data</span>):</span><br><span class="line">        <span class="keyword">if</span> self.top <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            self.top = StackNode(data)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            current = StackNode(data)</span><br><span class="line">            current.<span class="built_in">next</span> = self.top</span><br><span class="line">            self.top = current</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">pop</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">if</span> self.top <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.top = self.top.<span class="built_in">next</span></span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">peek</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">if</span> self.top <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        <span class="keyword">return</span> self.top.data</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">size</span>(<span class="params">self</span>):</span><br><span class="line">        count = <span class="number">0</span></span><br><span class="line">        current = self.top</span><br><span class="line">        <span class="keyword">while</span> current:</span><br><span class="line">            count += <span class="number">1</span></span><br><span class="line">            current = current.<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">return</span> count</span><br></pre></td></tr></table></figure>
+<p>資料參考：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20121027/ironman" title="Frank在IT邦幫忙的Blog">Frank</a></p>
+</blockquote>
+
+    </div>
+    
+    
+    
+    
+    
+</div>
+
+                    <footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            © 2022 - 2023 Penguinの筆記
+            <span class="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            @Penguin
+        </div>
+        <div></div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> & <a target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a></div>
+        
+    </div>
+</footer>
+
+                </div>
+            </div>
+            </transition>
+            <div id="showimg">
+                <img id="showimg-content" alt="showimg">
+            </div>
+        </div>
+        <script src="/js/functions.js"></script>
+<script src="/js/particlex.js"></script>
+
+    
+    
+    
+    
+
+
+    </body>
+</html>
+
+<!-- 滑鼠點擊特效 -->
+<canvas  id = "fireworks"  style = "position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"> </canvas > 
+<script  src = "https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"> </script> 
+<script  src = "/js/fireworks.min.js"> </script>
+<!-- 背景流星雨特效 -->
+<canvas  id = "background"  style = "position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1" > </canvas > 
+<script  src = "/js/background.min.js"> </script>
