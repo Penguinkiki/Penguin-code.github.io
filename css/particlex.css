@@ -703,6 +703,10 @@ footer .footer-wrap a {
     background: #e6efff;
     border-radius: 100px;
 }
+::-moz-selection {
+    background-color: #3392ff2a;
+    color: unset;
+}
 ::selection {
     background-color: #3392ff2a;
     color: unset;
@@ -743,7 +747,9 @@ iframe,
 .friend-link a,
 pre .language,
 pre .copycode {
-    user-select: none;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+            user-select: none;
 }
 footer {
     font-size: 14px;
