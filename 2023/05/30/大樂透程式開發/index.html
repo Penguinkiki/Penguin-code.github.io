@@ -3,7 +3,7 @@
 <html lang="zh-TW">
     <head>
         <meta charset="UTF-8">
-        <title>Archives | Penguinの筆記</title>
+        <title>大樂透程式開發 | Penguinの筆記</title>
         <meta name="author" content="Penguin">
         <meta name="description" content="">
         <meta name="keywords" content="">
@@ -133,79 +133,121 @@
 
                 </div>
                 <div id="main">
-                    
-<div id="archives">
-    
-    
-    <div class="timeline"style="z-index: 5" data-title="大樂透程式開發">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2023/5/30</div>
-            <a href="/2023/05/30/%E5%A4%A7%E6%A8%82%E9%80%8F%E7%A8%8B%E5%BC%8F%E9%96%8B%E7%99%BC/">
-                <h3>大樂透程式開發</h3>
-            </a>
-            <div class="info">
-                
-                
-            </div>
-        </div>
+                    <div class="article">
+    <div>
+        <h1>大樂透程式開發 </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/5/30
+        </span>
+        
+        
     </div>
     
-    <div class="timeline"style="z-index: 4" data-title="random函式介紹">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2023/3/10</div>
-            <a href="/2023/03/10/Random%E5%87%BD%E5%BC%8F%E4%BB%8B%E7%B4%B9/">
-                <h3>Random函式介紹</h3>
-            </a>
-            <div class="info">
-                
-                
-            </div>
-        </div>
+    <div class="content" v-pre>
+        <h2 id="Padlet網站"><a href="#Padlet網站" class="headerlink" title="Padlet網站"></a>Padlet網站</h2><p><img src="https://i.imgur.com/izNf4b7.png" alt="Padlet網站"></p>
+<blockquote>
+<p><a href="https://penguinkiki.github.io/2023/01/26/%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-%E9%8F%88%E7%B5%90%E4%B8%B2%E5%88%97-LinkedStack/">Padlet網站連結</a></p>
+</blockquote>
+<h2 id="F1-抽籤-x2F-取亂數"><a href="#F1-抽籤-x2F-取亂數" class="headerlink" title="F1 抽籤&#x2F;取亂數"></a>F1 抽籤&#x2F;取亂數</h2><p>六個 1-100 的 “偶數” 變數,存在陣列中,並列印出來 (數量&#x2F;範圍&#x2F;條件)</p>
+<pre><code class="python">import random
+n = int(input(&#39;組數:&#39;)) #輸入的組數
+l = [x for x in range(100)] #宣告一個list有1~99的整數
+for i in range(n):
+    print(random.sample(l, 6)) #在list隨機取六個數
+</code></pre>
+<h2 id="F2-六個數字的排序"><a href="#F2-六個數字的排序" class="headerlink" title="F2 六個數字的排序"></a>F2 六個數字的排序</h2><ol>
+<li>產生一組抽獎號</li>
+<li>將取亂數的程 (1-49) ,加上排序功能 (由小到大)</li>
+<li>將排序前後的陣列(result) 結果印出來(要用陣列&#x2F;串列儲存)</li>
+</ol>
+<pre><code class="python">def bubbleSort(arr): #宣告氣泡排序法
+    for i in range(1, len(arr)): #執行次數
+        for j in range(0, len(arr)-i): #list的編號
+            if arr[j] &gt; arr[j+1]: #如果後數字比前數字大，就交換
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+    return arr
+from random import * #import random函式
+a = [] #宣告list
+for i in range(6):
+    a.append(randint(1,49)) #插入六次隨機1-49整數
+print(a) #輸出排序前的list
+print(bubbleSort(a))
+</code></pre>
+<h2 id="F3-抽獎號碼不可以重覆"><a href="#F3-抽獎號碼不可以重覆" class="headerlink" title="F3 抽獎號碼不可以重覆"></a>F3 抽獎號碼不可以重覆</h2><ol>
+<li>檢查陣列中的資料, 確認號碼不重覆</li>
+<li>如果陣列中已經有該筆資料，即重新取亂數</li>
+<li>如果你採用的函數&#x2F;函式，已具有＂資料不重覆的特性＂，請用一文件說明該函數的用法</li>
+</ol>
+<pre><code class="python">import random as r
+print(r.sample([x for x in range(100)], 6))
+</code></pre>
+<h2 id="F4-產生-N期-的中獎號碼"><a href="#F4-產生-N期-的中獎號碼" class="headerlink" title="F4 產生 [N期] 的中獎號碼"></a>F4 產生 [N期] 的中獎號碼</h2><ol>
+<li>產生 Ｎ期的中獎號碼 （第一個提示句：詢問需要抽出幾期?）產生 6個獎號的迴圈要執行 N 次</li>
+<li>用陣列來儲存，每一期中的六個號碼不重覆</li>
+<li>每產生一期，輸出該期號碼</li>
+</ol>
+<pre><code class="python">from random import *
+a = []
+for i in range(6):
+    a.append(randint(1,50)*2)
+print(a)
+</code></pre>
+<h2 id="F5-加上特別號-x2F-查詢期別"><a href="#F5-加上特別號-x2F-查詢期別" class="headerlink" title="F5 加上特別號&#x2F;查詢期別"></a>F5 加上特別號&#x2F;查詢期別</h2><ol>
+<li>輸入：使用者輸入想要對獎的期別</li>
+<li>輸出：畫面上輸出該期中獎號碼，</li>
+</ol>
+<pre><code class="python">import random
+a = []
+l = [x for x in range(1, 100)] #宣告一個list有1~99的整數
+for i in range(10):
+    a.append(random.sample(l, 7)) #在list隨機取7個數
+print(a)
+while True:
+    n = int(input(&#39;想要對獎的期別:&#39;))#輸入想要對獎的期別
+    n -= 1 #讓輸入能對上程式
+    print(&#39;［第&#39;+str(n+1)+&#39;期中獎號碼：&#39;, end=&#39;&#39;)
+    for j in range(5):
+        print(str(a[n][j])+&#39;, &#39;, end=&#39;&#39;)
+    print(str(a[n][5]), end=&#39;&#39;)
+    print(&#39; / &#39;+&#39;特別號：&#39;+str(a[n][6])+&#39;］&#39;)
+</code></pre>
+<h2 id="F6-選擇-條件判斷"><a href="#F6-選擇-條件判斷" class="headerlink" title="F6 選擇+條件判斷"></a>F6 選擇+條件判斷</h2><ol>
+<li>輸入：查詢的期別、對獎的號碼</li>
+<li>輸出：第幾期／ＸＸ：中獎（沒中獎）、是否要繼續 (Y&#x2F;N)：</li>
+</ol>
+<pre><code class="python">#F5
+import random
+a = []
+l = [x for x in range(1, 100)] #宣告一個list有1~99的整數
+for i in range(10):
+    a.append(random.sample(l, 7)) #在list隨機取7個數
+    a = list(map(str, a))
+print(a)
+#F6
+while True:
+    period = int(input(&#39;期數:&#39;))
+    print(a[period - 1])
+    number = input(&#39;號碼:&#39;)
+    if number in a[period - 1]:
+        print(&#39;第&#39;, period, &#39;期 / &#39;+ number + &#39;:中獎&#39;)
+    else:
+        print(&#39;第&#39;, period, &#39;期 / &#39;+ number + &#39;:沒中獎&#39;)
+    if input(&#39;是否要繼續(Y/N):&#39;) == &#39;N&#39;:
+        break
+    else:
+        pass
+</code></pre>
+
     </div>
     
-    <div class="timeline"style="z-index: 3" data-title="chatgpt介紹">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2023/2/15</div>
-            <a href="/2023/02/15/ChatGPT%E4%BB%8B%E7%B4%B9/">
-                <h3>ChatGPT介紹</h3>
-            </a>
-            <div class="info">
-                
-                
-            </div>
-        </div>
-    </div>
     
-    <div class="timeline"style="z-index: 2" data-title="資料結構-鏈結串列(linkedstack)">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2023/1/26</div>
-            <a href="/2023/01/26/%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-%E9%8F%88%E7%B5%90%E4%B8%B2%E5%88%97-LinkedStack/">
-                <h3>資料結構-鏈結串列(LinkedStack)</h3>
-            </a>
-            <div class="info">
-                
-                
-            </div>
-        </div>
-    </div>
     
-    <div class="timeline"style="z-index: 1" data-title="資料結構-堆疊與佇列(stack&queue)(1/2)">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2023/1/26</div>
-            <a href="/2023/01/26/%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-%E5%A0%86%E7%96%8A%E8%88%87%E4%BD%87%E5%88%97-Stack-Queue-1-2/">
-                <h3>資料結構-堆疊與佇列(Stack &amp; Queue)(1/2)</h3>
-            </a>
-            <div class="info">
-                
-                
-            </div>
-        </div>
-    </div>
+    
     
 </div>
 
@@ -233,6 +275,11 @@
         </div>
         <script src="/js/functions.js"></script>
 <script src="/js/particlex.js"></script>
+
+    
+    
+    
+    
 
 
     </body>
